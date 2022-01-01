@@ -1,4 +1,24 @@
-# Solidity_MaketPlace_Front
+# frontend-nftdapp
 
-### 2022/01/01 새해😊😊
-##### 근데 정말 vue.js는 모르겠다.. 따라 하고 있지만 더 많은 공부가 필요할 것 같아요 !! 일단 오전은 이 대로 끝~!
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

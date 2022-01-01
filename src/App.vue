@@ -1,18 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app light>
+    <v-toolbar fixed color="teal lighten-2">
+      <v-toolbar title>NFT Maketplace</v-toolbar>
+      <v-spacer></v-spacer>
+
+      <div class="nav"> 
+        <a href="/">Home</a>
+        <a href="/wallet">Wallet</a>
+        <a href="/upload">Upload</a>
+      </div>
+    </v-toolbar>
+    <v-content class="contentWrapper">
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import 'vuetify/dist/vuetify.min.css'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+ 
 }
 </script>
 
@@ -24,5 +35,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.nav a{
+  font-weight: bold;
+  color : #2c3e50;
+  margin : 10px;
+}
+.nav a.router-link-exact-active{
+  color: #42b983;
+}
+
+.contentWrapper{
+  padding-top:20px;
 }
 </style>

@@ -1,10 +1,8 @@
 import Vue from "vue";
-import { Route } from "vue-router";
-import { component } from "vue/types/umd";
-
-import Main form './views/Main.vue';
-import Wallet form './views/Wallet.vue';
-import Upload form './views/Upload.vue';
+import Router from 'vue-router'
+import Main from './views/Main.vue';
+import Wallet from './views/Wallet.vue';
+import Upload from './views/Upload.vue';
 
 Vue.use(Router)
 
@@ -19,7 +17,7 @@ export default new Router({
         },
         {
             path: '/Wallet',
-            name: wallet,
+            name: 'wallet',
             component: Wallet
         },
         {
