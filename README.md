@@ -1,24 +1,7 @@
 # frontend-nftdapp
 
-## Project setup
-```
-npm install
-```
+#### 2021/01/01
+##### 책을 보고 하는데 옛날 버전이라 다른 부분이 너무 많다 ㅠㅠ 내일은 꼭 제대로 확인해보자!!!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 2021/01/02
+##### 잘못 나온것들은 다 고쳤는데 막상 메타마스크랑 연동이 안돼서 실행을 못 하고 있다.. 오늘 하루종일 매달려 봤지만 메타마스크랑의 연동은...<br/>아직 못 했다 ㅠㅠㅠ 정말 내일은 꼭 해보자 ㅠㅠㅠㅠ
