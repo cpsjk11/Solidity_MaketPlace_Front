@@ -1,30 +1,34 @@
 <template>
-    <div class="containWrap">
-        <v-card class="cardG">
-            <div>
-                <p class="text-center address">
-                {{account}} <span class="reftxt">(Address)</span>
-                </p>
-                <p class="text-center balance">
-                {{balance}} <span class="reftxt">(balance)</span>
-                </p>
-            </div>
-
-        </v-card>
-
-        <h2>Transfer</h2>
-        <v-select v-model="selectedAuction" :items="auctionIds" label="Asset" @change="getAuctionById"></v-select>
-        <div v-show="selectedAuction">
-            <h3>Auction Info</h3>
-            <div>Title: {{auctionInfo.title}}</div>
-            <div>price: {{auctionInfo.price}} Ether</div>
-            <div>TokenId: {{auctionInfo.tokenId}}</div>
-            <div>Owner: {{auctionInfo.owner}}</div>
+  <div class="containWrap">      
+      <v-card class="cardG">
+        <div>                 
+          <p class="text-center address">
+             {{account}} <span class="reftxt">(Address)</span>
+          </p>
+          <p class="text-center balance">
+             {{balance}} Ether <span class="reftxt">(Balance)</span>
+          </p>
         </div>
+      </v-card>
+           
+      <h2>Transfer</h2>
+      <v-select v-model="selectedAuction" :items="auctionIds" label="Asset" @change="getAuctionById"></v-select>
+      <div v-show="selectedAuction">
+        <h3>Auction Info</h3>
+        <div>Title: {{auctionInfo.title}}</div>
+        <div>Price: {{auctionInfo.price}} Ether</div>
+        <div>TokenId: {{auctionInfo.tokenId}}</div>
+        <div>Owner: {{auctionInfo.owner}}</div>
+      </div>
 
-        <v-text-field v-model="toAddress" label="To Address" required></v-text-field>
-        <v-btn @click="finalizeAuction" outlined color="teal">Finalize</v-btn>
-    </div>
+      <v-text-field
+        v-model="toAddress"
+        label="To Address"
+        required
+      ></v-text-field>
+
+      <v-btn @click="finalizeAuction" outlined color="teal">Finalize</v-btn>
+  </div>
 </template>
 
 <script>
@@ -59,7 +63,6 @@ export default{
 
         this.ciMyNFT = this.$web3.eth.contract(this.$config.MAKET_ABI).at(this.$config.MAKET_CA)
         this.ciAuctions = this.$web3.eth.contract(this.$config.AUCTIONS_ABI).at(this.$config.AUCTIONS_CA)
-
         this.getMyAuctions()
     },
 
@@ -72,6 +75,7 @@ export default{
 
         getAuctionById() {
             this.ciAuctions.getAuctionById(this.selectedAuction,{from: this.account, gas: this.$config.GAS_AMOUNT}, (error,result) =>{
+                console.log(result)
                 this.auctionInfo.title = result[0]
                 this.auctionInfo.price = this.$web3.fromWei(result[1], 'ether')
                 this.auctionInfo.tokenId = result[3]
@@ -105,13 +109,13 @@ export default{
         },
 
         getCurrentBlock() {
-            return new Promise((resolve, reject) => {
-                this.$web3.eth.getBlockNumber((err,blocknumber) =>{
-                    if(!err) resolve(blocknumber)
-                    reject(err)
-                })
+        return new Promise((resolve, reject ) => {
+            this.$web3.eth.getBlockNumber((err, blocknumber) => {
+                if(!err) resolve(blocknumber)
+                reject(err)
             })
-        }
+        })
+      }
     }
 }
 </script>

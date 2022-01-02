@@ -10,7 +10,7 @@
         type="file"
         @change="captureFile" />
 
-      <v-btn @click="uploadImg" outline color="teal">UploadImg</v-btn>   
+      <v-btn @click="uploadImg" outlined color="teal">UploadImg</v-btn>   
       <img :src="uploadedImg()" width="300" />
 
       <v-text-field
@@ -19,10 +19,10 @@
         required
         ></v-text-field>
 
-      <v-btn @click="submit" outline color="teal">Submit</v-btn>      
+      <v-btn @click="submit" outlined color="teal">Submit</v-btn>      
 
       <div v-show="isRegistered">
-        <v-btn @click="transferToCA" outline color="teal">TransferToCA</v-btn>              
+        <v-btn @click="transferToCA" outlined color="teal">TransferToCA</v-btn>              
       </div>
     </v-form>       
 
@@ -51,22 +51,23 @@ import PostAuction from '@/components/PostAuction.vue'
         PostAuction
     },
 
-    async mounted(){
-        this.account = await this.$getDefaultAccount();
-        this.contractInstance = this.$web3.eth.contract(this.$config.MAKET_ABI).at(this.$config.MAKET_CA);
-        this.tokenId = this._getRandomInt(123456789,999999999);
-    },
+    async mounted() {    
+    this.account = await this.$getDefaultAccount()
+    this.contractInstance = this.$web3.eth.contract(this.$config.MAKET_ABI).at(this.$config.MAKET_CA)
+    
+    this.tokenId = this._getRandomInt(123456789,999999999)              
+  },
 
-    methids: {
+    methods: {
         _getRandomInt(min,max){
-            return Math.floor(Math.random()) * (max - min + 1) + min
-        }
-    },
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        },
+    
 
-    captureFile(event){
-        event.stopPropagation();
-        this.file = event.target.files[0]
-    },
+        captureFile(event){
+            event.stopPropagation();
+            this.file = event.target.files[0]
+        },
 
     async uploadImg() {
         if(!this.file){
@@ -80,14 +81,14 @@ import PostAuction from '@/components/PostAuction.vue'
             baseURL: 'https://ipfs.infura.io:5001',
             url: '/api/v0/add',
             data: formData,
-            Headers: {'Content-Type': 'multpart/form-data'}
+            headers: {'Content-Type': 'multipart/form-data'}
         }).then((response) => {
             this.dataURI = response.data.Hash
         })
     },
 
-    uploadImg(){
-        return 'https://gateway.ipfs.io/ipfs/'+this.dataURI;
+    uploadedImg(){
+      return 'https://gateway.ipfs.io/ipfs/'+this.dataURI
     },
 
     submit() {
@@ -95,14 +96,17 @@ import PostAuction from '@/components/PostAuction.vue'
             alert("dataURI을 입력해주세요");
             return
         }
+        alert(this.account)
+        alert(this.tokenId)
+        alert(this.dataURI)
 
-        this.contractInstance.registerUniqueToken(this.account,this.tokenId,this.dataURI,{
-            form: this.account,
+         this.contractInstance.Maketplace(this.account,this.tokenId,this.dataURI,{
+            from: this.account,
             gas: this.$config.GAS_AMOUNT
         },(error,result) =>{
             console.log("result",result)
         })
-        this.watchTokenRegistered((error,result) => {
+        this.watchTokenRegistered((error) => {
             if(!error){
                 alert("토큰등록 완료🔥🔥");
                 this.isRegistered = true;
@@ -110,35 +114,25 @@ import PostAuction from '@/components/PostAuction.vue'
         })
     },
 
-    async watchTokenRegistered(cb) {
-        const currentBlock = await this.getCurrentBlock();
-        const eventWatcher = this.contractInstance.watchTokenRegistered({},{
-            fromBlock: currentBlock -1, toBlock:'latest'})
-            eventWatcher.watch(cb)
-    },
-
-    getCurrentBlock() {
-        return new Promise((resolve,reject) => {
-            this.$web3.eth.getBlockNumber((err,blocknumber) => {
-                if(!err) resolve(blocknumber)
-                reject(err)
-            })
-        })
-    },
-
-    transferTOCA(){
-        this.contractInstance.transfetFrom(this.account,this.$config.AUCTIONS_CA, this.tokenId,{
+    transferToCA(){
+        this.contractInstance.transferFrom(this.account,this.$config.AUCTIONS_CA, this.tokenId,{
             from: this.account,
             gas:this.config.GAS_AMOUNT
         },(error,result) => {
             console.log("result",result)
         })
 
-        this.watchTransfered((error,result) => {
-            if(!error){
-                alert("Token transfered to CA...!")
-            }
-        })
+        this.watchTransfered((error) => {
+        if(!error) alert("Token transfered to CA...!")
+      })
+    },
+
+
+    async watchTokenRegistered(cb) {
+        const currentBlock = await this.getCurrentBlock();
+        const eventWatcher = this.contractInstance.TokenRegistered({},{
+            fromBlock: currentBlock -1, toBlock:'latest'})
+            eventWatcher.watch(cb)
     },
 
     async watchTransfered(cb){
@@ -148,5 +142,17 @@ import PostAuction from '@/components/PostAuction.vue'
         })
         eventWatcher.watch(cb)
     },
+
+    getCurrentBlock() {
+        return new Promise((resolve,reject) => {
+            this.$web3.eth.getBlockNumber((err,blocknumber) => {
+                if(!err) resolve(blocknumber)
+                reject(err)
+        })
+      })
+    },   
+
+  }
+
 }
 </script>

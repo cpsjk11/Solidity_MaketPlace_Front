@@ -36,7 +36,7 @@ export default{
 
     async mounted(){
         this.account = await this.$getDefaultAccount()
-        this.contractInstance = this.$web3.eth.contract(this.$config.AUCTIONS_ABI).at(this/$config.AUCTIONS_CA)
+        this.contractInstance = this.$web3.eth.contract(this.$config.AUCTIONS_ABI).at(this.$config.AUCTIONS_CA)
     },
 
     methods : {
@@ -53,7 +53,7 @@ export default{
             (error,transactionHash) => {
                 console.log("txhash",transactionHash)
             })
-            this.watchCreated((error,result) => {
+            this.watchCreated((error) => {
                 if(!error){
                     alert("생성완료!!")
                 }

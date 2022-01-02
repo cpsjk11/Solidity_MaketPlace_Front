@@ -20,9 +20,23 @@
 
 <script>
 import 'vuetify/dist/vuetify.min.css'
+import VueMetamask from './meta.vue'
 
 export default {
   name: 'App',
+  components: {
+        VueMetamask,
+        },
+        data(){
+            return {
+                msg: "This is demo net work"
+            }
+        },
+        methods:{
+            onComplete(data){
+                console.log('data:', data);
+            }
+        }
  
 }
 </script>
