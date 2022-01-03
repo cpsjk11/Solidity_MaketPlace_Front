@@ -96,9 +96,9 @@ import PostAuction from '@/components/PostAuction.vue'
             alert("dataURI을 입력해주세요");
             return
         }
-        alert(this.account)
-        alert(this.tokenId)
-        alert(this.dataURI)
+        // alert(this.account)
+        // alert(this.tokenId)
+        // alert(this.dataURI)
 
          this.contractInstance.Maketplace(this.account,this.tokenId,this.dataURI,{
             from: this.account,

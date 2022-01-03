@@ -1,31 +1,38 @@
 <template>
   <v-app light>
-    <v-toolbar fixed color="teal lighten-2">
-      <v-toolbar title>NFT Maketplace</v-toolbar>
+    <v-app-bar fixed color="teal lighten-2" app dark :clipped-left="true">      
+      <v-toolbar-title>Maket Place</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <div class="nav"> 
+      <div class="nav">
         <a href="/">Home</a>
         <a href="/wallet">Wallet</a>
         <a href="/upload">Upload</a>
       </div>
-    </v-toolbar>
+    </v-app-bar>
     <v-content class="contentWrapper">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
+      <div id="demo">
+        <vue-metamask 
+            userMessage="msg" 
+            @onComplete="onComplete"
+        >
+        </vue-metamask>
+    </div>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import 'vuetify/dist/vuetify.min.css'
-import VueMetamask from './meta.vue'
+import vueMetamask from '../node_modules/vue-metamask/src/VueMetamask.vue';
 
 export default {
   name: 'App',
   components: {
-        VueMetamask,
+        vueMetamask,
         },
         data(){
             return {
