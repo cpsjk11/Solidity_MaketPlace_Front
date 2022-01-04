@@ -10,7 +10,7 @@
         <a href="/upload">Upload</a>
       </div>
     </v-app-bar>
-    <v-content class="contentWrapper">
+    <v-main class="contentWrapper">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
@@ -21,7 +21,7 @@
         >
         </vue-metamask>
     </div>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

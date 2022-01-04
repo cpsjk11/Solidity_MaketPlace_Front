@@ -2,8 +2,8 @@ const Maket = require('./contracts/Maket.json');
 const Auctions = require('./contracts/Auctions.json');
 
 export default {
-    MAKET_CA: '0x77437dDd8cf13f40ABD0516e9999a56C3afD1497',
-    AUCTIONS_CA:'0x5F9A710A4d20e9C0A72391558f470Dce7c6Cc70c',
+    MAKET_CA: '0x02Bf34B22350e7447294526b813b0913A2Fc1b05',
+    AUCTIONS_CA:'0x296a0DE64536d84Bb4Aed57b1d92C15f9Ee2E87e',
     MAKET_ABI: Maket.abi,
     AUCTIONS_ABI: Auctions.abi,
 

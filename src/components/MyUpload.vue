@@ -92,32 +92,31 @@ import PostAuction from '@/components/PostAuction.vue'
     },
 
     submit() {
-        if(!this.dataURI){
-            alert("dataURI을 입력해주세요");
-            return
-        }
-        // alert(this.account)
-        // alert(this.tokenId)
-        // alert(this.dataURI)
+      if(!this.dataURI){
+        alert("Fill in dataURI on the input")
+        return
+      }      
+            
+      this.contractInstance.Maketplace(this.account, this.tokenId, this.dataURI, {
+          from: this.account,
+          gas: this.$config.GAS_AMOUNT
+        }, (error, result) => {
+          console.log("result",result)          
+      })
 
-         this.contractInstance.Maketplace(this.account,this.tokenId,this.dataURI,{
-            from: this.account,
-            gas: this.$config.GAS_AMOUNT
-        },(error,result) =>{
-            console.log("result",result)
-        })
-        this.watchTokenRegistered((error) => {
-            if(!error){
-                alert("토큰등록 완료🔥🔥");
-                this.isRegistered = true;
-            }
-        })
+      this.watchTokenRegistered((error, result) => {
+          console.log(result);
+        if(!error) {
+          alert("Token registered...!")
+          this.isRegistered = true
+        }
+      })
     },
 
     transferToCA(){
         this.contractInstance.transferFrom(this.account,this.$config.AUCTIONS_CA, this.tokenId,{
             from: this.account,
-            gas:this.config.GAS_AMOUNT
+            gas:this.$config.GAS_AMOUNT
         },(error,result) => {
             console.log("result",result)
         })
@@ -129,28 +128,25 @@ import PostAuction from '@/components/PostAuction.vue'
 
 
     async watchTokenRegistered(cb) {
-        const currentBlock = await this.getCurrentBlock();
-        const eventWatcher = this.contractInstance.TokenRegistered({},{
-            fromBlock: currentBlock -1, toBlock:'latest'})
-            eventWatcher.watch(cb)
+      const currentBlock = await this.getCurrentBlock()
+      const eventWatcher = this.contractInstance.TokenRegistered({}, {fromBlock: currentBlock - 1, toBlock: 'latest'})
+      eventWatcher.watch(cb)
     },
 
-    async watchTransfered(cb){
-        const currentBlock = await this.getCurrentBlock()
-        const eventWatcher = this.contractInstance.Transfer({},{
-            fromBlock: currentBlock -1, toBlock: 'latest'
-        })
-        eventWatcher.watch(cb)
+    async watchTransfered(cb) {
+      const currentBlock = await this.getCurrentBlock()
+      const eventWatcher = this.contractInstance.Transfer({}, {fromBlock: currentBlock - 1, toBlock: 'latest'})
+      eventWatcher.watch(cb)
     },
 
     getCurrentBlock() {
-        return new Promise((resolve,reject) => {
-            this.$web3.eth.getBlockNumber((err,blocknumber) => {
-                if(!err) resolve(blocknumber)
-                reject(err)
+      return new Promise((resolve, reject ) => {
+        this.$web3.eth.getBlockNumber((err, blocknumber) => {
+            if(!err) resolve(blocknumber)
+            reject(err)
         })
       })
-    },   
+    },  
 
   }
 

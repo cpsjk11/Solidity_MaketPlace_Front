@@ -13,7 +13,7 @@
                           label="Price"
                           persistent-hint></v-text-field>
 
-            <v-btn @click="createAuction()" outlined color="teal">Create Auction</v-btn>
+            <v-btn @click="createAuction" outlined color="teal">Create Auction</v-btn>
         </v-form>
     </div>
 </template>
