@@ -10,6 +10,9 @@ import Web3 from 'web3'
 Vue.use(Vuetify) // 플로그인을 바로 설치하는 함수이다.
 Vue.use(VueAxios,axios)
 
+const EventBus = new Vue();
+export default EventBus;
+
 Vue.config.productionTip = false // Vue앱이 처음 실행될 때 나오는 경고문을 보여줄지 말지 부여하는 곳
 
 /*

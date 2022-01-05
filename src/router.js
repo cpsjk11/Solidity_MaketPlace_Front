@@ -22,7 +22,8 @@ export default new Router({
         {
             path: '/Wallet',
             name: 'wallet',
-            component: Wallet
+            component: Wallet,
+            
         },
         {
             path: '/upload',

@@ -18,6 +18,7 @@
                     <div>소유자: {{auction.owner}}</div>
                     <!-- <div>활성화: {{auction.active}}</div> -->
                     <div>판매여부: {{auction.finalized}}</div>
+                    <div></div>
                 </v-card>
             </v-flex>
         </v-layout>

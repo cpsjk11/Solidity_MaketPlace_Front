@@ -43,6 +43,8 @@ export default{
         return {
             account: '', // 현재 주소
             balance: null, // 잔액
+            name: '',
+            name2: '',
 
             ciMyNFT: null, // Maket 스마트컨트랙
             ciAuctions: null, // Auction 스마트컨트랙
@@ -59,6 +61,7 @@ export default{
             }
         }
     },
+    
 
     async mounted() {
         this.account = await this.$getDefaultAccount() // 현재 계정의 주소를 반환하는 함수
@@ -70,6 +73,8 @@ export default{
         this.ciMyNFT = this.$web3.eth.contract(this.$config.MAKET_ABI).at(this.$config.MAKET_CA) // 각각의 스마트컨트랙을 사용하기 위해 스마트컨트랙의 주소와 ABI를 가져와 생성한다.
         this.ciAuctions = this.$web3.eth.contract(this.$config.AUCTIONS_ABI).at(this.$config.AUCTIONS_CA) // 각각의 스마트컨트랙을 사용하기 위해 스마트컨트랙의 주소와 ABI를 가져와 생성한다.
         this.getMyAuctions()
+
+        
     },
 
     methods: {
