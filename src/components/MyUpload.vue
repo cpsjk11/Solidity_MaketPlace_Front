@@ -21,7 +21,7 @@
 
       <v-btn @click="submit" outlined color="teal">Submit</v-btn>      
 
-      <div v-show="isRegistered">
+      <div v-show="isRegistered"><!-- v-show는 해당 하는 함수가 true일때만 보여지게된다. -->
         <v-btn @click="transferToCA" outlined color="teal">TransferToCA</v-btn>              
       </div>
     </v-form>       
@@ -92,25 +92,26 @@ import PostAuction from '@/components/PostAuction.vue'
     },
 
     submit() {
-      if(!this.dataURI){
-        alert("Fill in dataURI on the input")
-        return
-      }      
-            
-      this.contractInstance.Maketplace(this.account, this.tokenId, this.dataURI, {
-          from: this.account,
-          gas: this.$config.GAS_AMOUNT
-        }, (error, result) => {
-          console.log("result",result)          
-      })
-
-      this.watchTokenRegistered((error, result) => {
-          console.log(result);
-        if(!error) {
-          alert("Token registered...!")
-          this.isRegistered = true
+        if(!this.dataURI){
+            alert("dataURI을 입력해주세요");
+            return
         }
-      })
+        // alert(this.account)
+        // alert(this.tokenId)
+        // alert(this.dataURI)
+
+         this.contractInstance.Maketplace(this.account,this.tokenId,this.dataURI,{
+            from: this.account,
+            gas: this.$config.GAS_AMOUNT
+        },(error,result) =>{
+            console.log("result",result)
+        })
+        this.watchTokenRegistered((error) => {
+          if(!error){
+                alert("토큰등록 완료🔥🔥");
+                this.isRegistered = true;
+            }
+        })
     },
 
     transferToCA(){

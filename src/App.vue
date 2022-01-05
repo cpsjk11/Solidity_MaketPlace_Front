@@ -1,3 +1,5 @@
+
+<!-- App.vue는 전역적으로 보여지는 페이지이다. -->
 <template>
   <v-app light>
     <v-app-bar fixed color="teal lighten-2" app dark :clipped-left="true">      
@@ -12,12 +14,12 @@
     </v-app-bar>
     <v-main class="contentWrapper">
       <v-container fluid>
-        <router-view></router-view>
+        <router-view></router-view> <!-- router-view 여기서 라우팅을 구성한 페이지가 렌더링 되는 부분이다. -->
       </v-container>
-      <div id="demo">
+      <div id="demo"> <!-- 여기있는 div demo는 메타마스크를 연동하기 위한 곳 이다. -->
         <vue-metamask 
             userMessage="msg" 
-            @onComplete="onComplete"
+            @onComplete="onComplete" 
         >
         </vue-metamask>
     </div>
