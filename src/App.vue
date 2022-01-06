@@ -10,6 +10,7 @@
         <a href="/">Home</a>
         <a href="/wallet?text=hi" @click="clickBtn">Wallet</a>
         <a href="/upload">Upload</a>
+        <a href="/goods">Goods</a>
       </div>
     </v-app-bar>
     <v-main class="contentWrapper">
@@ -76,5 +77,8 @@ export default {
 
 .contentWrapper{
   padding-top:20px;
+}
+a{
+  text-decoration: none;
 }
 </style>

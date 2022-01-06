@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from './views/Main.vue';
 import Wallet from './views/Wallet.vue';
 import Upload from './views/Upload.vue';
+import Goods from './views/Goods.vue';
 
 Vue.use(Router)
 /*
@@ -29,6 +30,11 @@ export default new Router({
             path: '/upload',
             name: 'upload',
             component: Upload
+        },
+        {
+            path: '/goods',
+            name: 'goods',
+            component: Goods
         }
     ]
 })

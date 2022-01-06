@@ -9,6 +9,7 @@
             해당 반복문을 통해서 각각의 등록된 NFT상품들을 보여준다.
          -->
             <v-flex v-for="(auction, index) in auctions" :key="index" xs4> <!-- 상품은 auction을 xs 크기 이상에서 4로 고정 -->
+                <a v-bind:href="auction.AuctionId">
                 <v-card>
                     <v-img :src="auction.image" height="200px"></v-img>
 
@@ -20,6 +21,7 @@
                     <div>판매여부: {{auction.finalized}}</div>
                     <div></div>
                 </v-card>
+                </a>
             </v-flex>
         </v-layout>
     </v-container>
@@ -70,7 +72,8 @@ export default{
                             tokenId: result[3],
                             owner: owner.substring(0,4) +"..."+ owner.substring(40,42),
                             active: result[6],
-                            finalized: result[7] ? "판매종료" : "판매중"
+                            finalized: result[7] ? "판매종료" : "판매중",
+                            AuctionId: "/goods?text="+i
                         })
                     })
                 })
