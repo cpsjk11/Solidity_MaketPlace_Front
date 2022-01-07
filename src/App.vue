@@ -80,4 +80,7 @@ export default {
 a{
   text-decoration: none;
 }
+.card-size{
+  margin: 10px 0;
+}
 </style>

@@ -8,10 +8,11 @@
             해당 v-flex는 반복문을 돌면서 옥션을 보여주는데 index값 만큼 도는 반복문이다.
             해당 반복문을 통해서 각각의 등록된 NFT상품들을 보여준다.
          -->
-            <v-flex v-for="(auction, index) in auctions" :key="index" xs4> <!-- 상품은 auction을 xs 크기 이상에서 4로 고정 -->
+            <v-flex v-for="(auction, index) in auctions" :key="index" md4> <!-- 상품은 auction을 xs 크기 이상에서 4로 고정 -->
+                <!-- 자바와는 달리 a태그 안에 변수를 넣어주고 싶다면 v-bind을 사용해 넣어줘야 한다. -->
                 <a v-bind:href="auction.AuctionId">
-                <v-card>
-                    <v-img :src="auction.image" height="200px"></v-img>
+                <v-card class="card-size">
+                    <v-img :src="auction.image" height="300px"></v-img>
 
                     <div>제목: {{auction.title}}</div>
                     <div>가격: {{auction.price}} Ether</div>
