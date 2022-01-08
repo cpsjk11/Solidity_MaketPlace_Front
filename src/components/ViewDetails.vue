@@ -21,19 +21,48 @@
                         <span class="left">가격 : </span> 
                         <span class="right">{{auction[0].price}} Ether</span>
                     </div>
+                    
                     <div id="btn">
-                        <v-btn @click="purchase" id="purchase">구매하기</v-btn>
+                        <v-btn v-if="!auction[0].active" @click="purchase" id="purchase" disabled>구매하기</v-btn>
+                        <v-btn v-else @click="purchase" id="purchase">구매하기</v-btn>
                     </div>
                 </div>
             </div>
         </div>
         <div class="subject">
-            <span> 상품들의 대한 설명들... </span>
+            <div class="Detail ">
+                <div id="Productinfo" @click="toggle">상품정보</div>
+                <div style="display: none;" id="subject"> <br/>
+                <div id="name">Name</div>
+                <div id="title">{{auction[0].title}}</div>
+                    <div id="tokenid">
+                        <span class="left">토큰아이디  </span>
+                        <span class="right">{{auction[0].tokenId}}</span>
+                    </div>
+                    <div id="owner">
+                        <span class="left">소유자  </span>
+                        <span class="right">{{auction[0].owner}}</span>
+                    </div>
+                    <div id="price">
+                        <span class="left">가격  </span> 
+                        <span class="right">{{auction[0].price}} Ether</span>
+                    </div>
+                </div>
+            </div>
+            <div class="information">
+                <div id="ProductDescription" @click="toggle2">상품설명</div>
+                <div style="display: none;" id="subject2"> 
+                    일본 여행 갔을 때 동전지갑으로 파는 고양이 지갑이 귀여워 산 후 <br/>
+                    카페에 휴지를 덧 쓴 모습으로 너무나 귀여워 사진으로 남긴 작품이다. 
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import $ from 'jquery';
+
     export default{
         data(){
             return{
@@ -74,6 +103,14 @@
                     })
                 })
             },
+
+            toggle(){
+                
+                 $("#subject").slideToggle(200);
+            },
+            toggle2(){
+                 $("#subject2").slideToggle(200);
+            },
             async purchase(){
                 this.price2 = this.$web3.fromWei(this.price, 'ether')
                 alert(this.price2)
@@ -94,7 +131,6 @@
     display: inline-block;
     width: 450px;
     height: 450px;
-    border: 1px solid red;
     font-weight: bold;
     padding: 0 20px;
 }
@@ -112,8 +148,7 @@
     float: left;
 }
 .subject{
-    border: 1px solid royalblue;
-    height: 400px;
+    height: 250px;
     width: 900px;
     margin: 20px auto;
 }
@@ -151,5 +186,40 @@
     height: 48px;
     color: white;
     background-color: black;
+}
+#Productinfo{
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #dfdfdf;
+}
+#ProductDescription{
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #dfdfdf;
+}
+#subject{
+    text-align: left;
+}
+#subject2{
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+}
+.Detail{
+    padding: 10px;
+    display: inline-block;
+    width: 448px;
+    height: 100%;
+    font-weight: bold;
+}
+.information{
+    padding: 10px;
+    float: right;
+    width: 450px;
+    height: 100%;
+}
+#name{
+    font-size: 8px;
 }
 </style>

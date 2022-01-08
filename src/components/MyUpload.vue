@@ -20,7 +20,7 @@
         required
         ></v-text-field>
 
-      <v-btn @click="submit" outlined color="teal">Submit</v-btn>      
+      <v-btn @click="submit" outlined color="teal">IPFS변환</v-btn>      
 
       <div v-show="isRegistered"><!-- v-show는 해당 하는 함수가 true일때만 보여지게된다. -->
         <v-btn @click="transferToCA" outlined color="teal">TransferToCA</v-btn>              
@@ -118,7 +118,18 @@ import PostAuction from '@/components/PostAuction.vue'
                                         // 토큰 등록 완료 이벤트 발생시 마찬가지로 토큰등록 완료하는 알림창을 보여준다.
           if(!error){
                 alert("토큰등록 완료🔥🔥");
-                this.isRegistered = true; // 토큰이 등록이 됬을때만 해당 소유권을 관리자로 넘기는 버튼을 활성화 해 준다.
+               // this.isRegistered = true; // 토큰이 등록이 됬을때만 해당 소유권을 관리자로 넘기는 버튼을 활성화 해 준다.
+               this.contractInstance.transferFrom(this.account,this.$config.AUCTIONS_CA, this.tokenId,{
+                from: this.account,
+                gas:this.$config.GAS_AMOUNT
+            },(error,result) => {
+                console.log("result",result)
+            })
+
+            this.watchTransfered((error) => { // 성공적으로 토큰을 보냈다면 이벤트가 발생을 하게 되고 이벤트가 발생이 완료 되었다면 
+                                    //  현재 이 함수를 성공적으로 실행해 알림창이 띄워진다!! 
+            if(!error) alert("관리자 에게 토큰 전송완료🔥🔥")
+        })
             }
         })
     },

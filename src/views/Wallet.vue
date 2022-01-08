@@ -1,6 +1,5 @@
 <template>
   <div>
-      {{ $route.query.text }}
     <h2>Wallet Page</h2>  
     <MyWallet />
   </div>

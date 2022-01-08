@@ -83,6 +83,7 @@ export default{
         */
         getMyAuctions() { 
             this.ciAuctions.getAuctionsOf(this.account,{from: this.account, gas: this.$config.GAS_AMOUNT}, (error,result) => {
+                
                 this.auctionIds = result // 해당 함수가 성공적으로 수행하면 결과값들을 auctionIds 배열에 담는다. 
             })
         },
