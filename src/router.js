@@ -4,6 +4,7 @@ import Main from './views/Main.vue';
 import Wallet from './views/Wallet.vue';
 import Upload from './views/Upload.vue';
 import Goods from './views/Goods.vue';
+import Test from './views/Test.vue';
 
 Vue.use(Router)
 /*
@@ -35,6 +36,11 @@ export default new Router({
             path: '/goods',
             name: 'goods',
             component: Goods
+        },
+        {
+            path: '/test',
+            name: 'testWeb3js',
+            component: Test
         }
     ]
 })
