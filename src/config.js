@@ -9,7 +9,7 @@ const MyToken = require('./contracts/MyToken.json');
 export default {
     MAKET_CA: '0xDB4628d26Fc557584cE176b1e1223CA108ad50De', // 해당 스마트컨트랙이 배포된 주소
     AUCTIONS_CA:'0x199CC8cAC79cD8b900A93c9B341873Ded98bDF36', 
-    MYTOKEN_CA: '0xc9Ae30938bD7859caB7C54a583DBDc0aC67d0f7d',
+    MYTOKEN_CA: '0xCE07bdED1bc7052DE411Fce160F8A8c616EE615c',
     MAKET_ABI: Maket.abi, // abi는 배포된 스마트 컨트랙을 사용하기 위해서 abi라는 자료를 사용하기 위해 따로 변수에 담아 두었다.
     AUCTIONS_ABI: Auctions.abi,
     MYTOKEN_ABI: MyToken.abi,
